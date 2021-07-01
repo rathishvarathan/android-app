@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 
 void main() {
@@ -21,26 +19,108 @@ class MyApp extends StatelessWidget {
         // "hot reload" (press "r" in the console where you ran "flutter run",
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
-        // is not restart
+        // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(),
+      home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
-class MyHomePage  extends StatelessWidget{
-  bool selected=false;
+class MyHomePage extends StatefulWidget {
+  MyHomePage({Key? key, required this.title}) : super(key: key);
+
+  // This widget is the home page of your application. It is stateful, meaning
+  // that it has a State object (defined below) that contains fields that affect
+  // how it looks.
+
+  // This class is the configuration for the state. It holds the values (in this
+  // case the title) provided by the parent (in this case the App widget) and
+  // used by the build method of the State. Fields in a Widget subclass are
+  // always marked "final".
+
+  final String title;
+
   @override
-  Widget build(BuildContext  context) {
-    return Scaffold(
-      body: Center(child: Column(
-        children: [
-          ElevatedButton(onPressed: (){
-            selected=true;
-          }, child: Text("click here for change")),
-           Text("data",style: TextStyle(color:Colors.green,fontSize: 35,)),
-        ],
-      )));
+  _MyHomePageState createState() => _MyHomePageState();
 }
+
+class _MyHomePageState extends State<MyHomePage> {
+  int _counter = 0;
+
+  void _incrementCounter() {
+    setState(() {
+      // This call to setState tells the Flutter framework that something has
+      // changed in this State, which causes it to rerun the build method below
+      // so that the display can reflect the updated values. If we changed
+      // _counter without calling setState(), then the build method would not be
+      // called again, and so nothing would appear to happen.
+      _counter++;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // This method is rerun every time setState is called, for instance as done
+    // by the _incrementCounter method above.
+    //
+    // The Flutter framework has been optimized to make rerunning build methods
+    // fast, so that you can just rebuild anything that needs updating rather
+    // than having to individually change instances of widgets.
+    return Scaffold(
+      appBar: AppBar(
+        // Here we take the value from the MyHomePage object that was created by
+        // the App.build method, and use it to set our appbar title.
+        title: Text(widget.title),
+      ),
+      body: Center(
+        child:ListView(
+          //mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+          Row(
+            children: [
+              Icon(Icons.ac_unit_sharp,size:90.0,color:Colors.blue),
+              Icon(Icons.accessibility_new_sharp,size:90.0,color:Colors.lightGreen),
+              Icon(Icons.add_alarm_outlined,size:90.0,color:Colors.lightGreen),
+            ],
+          ),
+      
+          ElevatedButton(onPressed:(){
+
+          },child:Text ("submit")),
+            Container(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children:[
+                Expanded(child:Image.network("https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/YouTube_social_white_square_%282017%29.svg/1200px-YouTube_social_white_square_%282017%29.svg.png")),
+                
+                Expanded(
+                  flex: 2,
+                  child:Image.network("https://image.shutterstock.com/image-photo/valencia-spain-march-05-2017-260nw-593204357.jpg")),
+                
+                Expanded(
+                flex :3,
+                child: Image.network("https://play-lh.googleusercontent.com/8r-ZTPoTIywU_aK2OXmLKg5WOdzXRxv7UUpiIk7kY7Du12fXKDwxUb2M_vBFp4pPvmpK")),
+                ]
+              )
+            ),
+            Image .network("https://upload.wikimedia.org/wikipedia/en/a/a9/MarioNSMBUDeluxe.png"),
+          
+            Text(
+              'WELCOME', style:TextStyle(color:Colors.amberAccent,fontSize: 45.0)
+            ),
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.headline4,
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: Icon(Icons.add),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
 }
